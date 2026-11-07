@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Don Street Restaurant · Curaçao</title>
+<meta name="description" content="The first and only Street Restaurant in Curaçao. Flavored steaks, burgers, pizza, hotdogs and more. Order online for pickup or delivery.">
+<style>
+@font-face{font-family:"Bebas Neue";font-weight:400;font-display:swap;src:url(fonts/bebas-neue-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:Inter;font-weight:400;font-display:swap;src:url(fonts/inter-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:Inter;font-weight:500;font-display:swap;src:url(fonts/inter-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:Inter;font-weight:700;font-display:swap;src:url(fonts/inter-latin-700-normal.woff2) format("woff2")}
+:root{--red:#c8102e;--red2:#e0233f;--ink:#0b0b0b;--coal:#151515;--paper:#f6f1ea;--muted:#a9a39b;--lime:#d7f24a}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;background:var(--ink);color:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+.display{font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;letter-spacing:.02em;line-height:.92;font-weight:400}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+
+/* nav */
+nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:12px 22px;background:rgba(11,11,11,.82);backdrop-filter:blur(10px);border-bottom:1px solid #222}
+nav .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+nav .brand img{width:42px;height:42px}
+nav .brand span{font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-size:24px;letter-spacing:.04em}
+nav .links{display:flex;gap:26px;align-items:center}
+nav .links a{text-decoration:none;font-size:14px;font-weight:500;color:#ddd}
+nav .links a:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;text-decoration:none;font-weight:700;font-size:15px;padding:13px 22px;border-radius:999px;transition:transform .15s,background .15s;border:0;cursor:pointer}
+.btn:hover{background:var(--red2);transform:translateY(-1px)}
+.btn.ghost{background:transparent;border:1.5px solid #fff3}
+.btn.ghost:hover{border-color:#fff;background:#ffffff10}
+nav .btn{padding:10px 18px;font-size:14px}
+@media(max-width:760px){nav .links a:not(.btn){display:none}}
+
+/* hero */
+.hero{position:relative;min-height:100svh;display:grid;align-items:end;overflow:hidden}
+.hero .bg{position:absolute;inset:0;background:url(img/picana.jpg) center/cover}
+.hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,11,.35) 0%,rgba(11,11,11,.55) 45%,var(--ink) 100%)}
+.hero .inner{position:relative;padding:130px 22px 70px}
+.hero .logo{width:140px;margin-bottom:22px;filter:drop-shadow(0 8px 30px #000a)}
+.kicker{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--red2);margin-bottom:14px}
+.hero h1{font-size:clamp(64px,13vw,150px);max-width:11ch}
+.hero h1 em{font-style:normal;color:var(--red2)}
+.hero p{max-width:520px;font-size:18px;color:#ddd;margin:18px 0 30px}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:34px}
+.chip{font-size:13px;padding:7px 13px;border-radius:999px;background:#ffffff12;border:1px solid #ffffff1c;color:#eee}
+
+/* marquee */
+.strip{background:var(--red);overflow:hidden;white-space:nowrap;padding:14px 0}
+.strip div{display:inline-block;animation:slide 28s linear infinite}
+.strip span{font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-size:30px;letter-spacing:.06em;margin:0 22px}
+.strip span.dot{opacity:.55}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+section{padding:96px 0}
+.head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:40px;flex-wrap:wrap}
+.head h2{font-size:clamp(48px,7vw,84px)}
+.head p{max-width:420px;color:var(--muted)}
+
+/* menu */
+.menu{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.dish{position:relative;border-radius:18px;overflow:hidden;background:var(--coal);aspect-ratio:3/4;isolation:isolate}
+.dish img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.dish:hover img{transform:scale(1.06)}
+.dish .cap{position:absolute;inset:auto 0 0 0;padding:60px 18px 18px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.88))}
+.dish h3{font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-size:30px;letter-spacing:.03em;font-weight:400}
+.dish p{font-size:13.5px;color:#cfcac3}
+.dish.wide{grid-column:span 2;aspect-ratio:auto}
+.tag{position:absolute;top:14px;left:14px;background:var(--lime);color:#111;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:999px}
+@media(max-width:900px){.menu{grid-template-columns:repeat(2,1fr)}.dish.wide{grid-column:span 2;aspect-ratio:4/3}}
+
+/* order band */
+.order{background:var(--paper);color:var(--ink);border-radius:28px;padding:56px;display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+.order h2{font-size:clamp(46px,6vw,74px)}
+.order h2 em{font-style:normal;color:var(--red)}
+.order p{color:#4b4640;margin:14px 0 26px;max-width:460px}
+.slots{display:grid;gap:12px}
+.slot{display:flex;justify-content:space-between;align-items:center;background:#fff;border:1px solid #e6ded3;border-radius:16px;padding:18px 22px}
+.slot b{font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-size:28px;font-weight:400;letter-spacing:.03em}
+.slot span{font-weight:700;color:var(--red)}
+@media(max-width:820px){.order{grid-template-columns:1fr;padding:34px 24px}}
+
+/* vibe */
+.vibe{display:grid;grid-template-columns:1.3fr 1fr 1fr;grid-template-rows:260px 260px;gap:16px}
+.vibe figure{border-radius:18px;overflow:hidden;background:var(--coal)}
+.vibe figure img{width:100%;height:100%;object-fit:cover}
+.vibe figure:first-child{grid-row:span 2}
+.vibe .note{background:var(--red);border-radius:18px;padding:26px;display:flex;flex-direction:column;justify-content:space-between}
+.vibe .note h3{font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-size:40px;font-weight:400;line-height:.95}
+.vibe .note p{font-size:14.5px;color:#ffe3e7}
+@media(max-width:820px){.vibe{grid-template-columns:1fr 1fr;grid-template-rows:auto}.vibe figure{aspect-ratio:1}.vibe figure:first-child{grid-column:span 2;grid-row:auto;aspect-ratio:4/3}}
+
+/* review */
+.review{text-align:center;max-width:860px;margin:0 auto}
+.stars{color:#ffc93c;font-size:26px;letter-spacing:6px}
+.review blockquote{font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-size:clamp(40px,6vw,68px);line-height:1;margin:18px 0}
+.review cite{font-style:normal;color:var(--muted);font-size:14px}
+
+/* visit */
+.visit{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.card{background:var(--coal);border:1px solid #232323;border-radius:22px;padding:30px}
+.card h3{font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-size:36px;font-weight:400;letter-spacing:.03em;margin-bottom:6px}
+.card .sub{color:var(--muted);font-size:14px;margin-bottom:20px}
+.hours{list-style:none}
+.hours li{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px dashed #2e2e2e;font-size:15px}
+.hours li.today{color:var(--lime);font-weight:700}
+.hours li:last-child{border:0}
+.locs{display:grid;gap:14px}
+.loc{display:flex;gap:16px;align-items:flex-start;padding:16px;border-radius:16px;background:#1c1c1c}
+.loc .pin{flex:none;width:40px;height:40px;border-radius:50%;background:var(--red);display:grid;place-items:center;font-size:18px}
+.loc b{display:block;font-size:16px}
+.loc small{color:var(--muted);font-size:13.5px}
+.loc .soon{display:inline-block;margin-left:6px;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--lime);color:#111;padding:3px 8px;border-radius:999px;vertical-align:middle}
+.map{margin-top:16px;border-radius:16px;overflow:hidden;height:220px;border:1px solid #2a2a2a}
+.map iframe{width:100%;height:100%;border:0;filter:grayscale(1) invert(.92) contrast(.9)}
+@media(max-width:820px){.visit{grid-template-columns:1fr}}
+
+/* footer */
+footer{border-top:1px solid #1f1f1f;padding:50px 0 90px}
+footer .row{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+footer .f-brand{display:flex;align-items:center;gap:14px}
+footer .f-brand img{width:64px}
+footer .socials{display:flex;gap:10px}
+footer .socials a{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#1a1a1a;text-decoration:none;font-weight:700;font-size:13px}
+footer .socials a:hover{background:var(--red)}
+footer .fine{color:#6d6862;font-size:12.5px;margin-top:26px}
+
+/* floating order (mobile) */
+.fab{position:fixed;left:16px;right:16px;bottom:16px;z-index:60;display:none;justify-content:center;box-shadow:0 10px 30px #000c}
+@media(max-width:760px){.fab{display:flex}}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="#top"><img src="img/logo.png" alt="The Don logo"><span>The Don</span></a>
+  <div class="links">
+    <a href="#menu">Menu</a>
+    <a href="#vibe">The Spot</a>
+    <a href="#visit">Hours &amp; Location</a>
+    <a class="btn" href="order.html">Order now</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="bg"></div>
+  <div class="wrap inner">
+    <img class="logo" src="img/logo.png" alt="The Don Street Restaurant">
+    <div class="kicker">Willemstad · Curaçao</div>
+    <h1 class="display">Street food <em>made</em> the Don way.</h1>
+    <p>The first and only Street Restaurant in Curaçao. Flavored steaks, stacked burgers, pizza, hotdogs and more, served big under the palapa until late.</p>
+    <div class="ctas">
+      <a class="btn" href="order.html">Order online →</a>
+      <a class="btn ghost" href="#menu">See the menu</a>
+    </div>
+    <div class="chips">
+      <span class="chip">🥩 Picana &amp; steaks</span>
+      <span class="chip">🍔 Smash stacks</span>
+      <span class="chip">🍕 Pizza</span>
+      <span class="chip">🛵 Pickup &amp; delivery</span>
+      <span class="chip">🌙 Open late</span>
+    </div>
+  </div>
+</header>
+
+<div class="strip" aria-hidden="true"><div>
+  <span>Come for the food</span><span class="dot">★</span><span>Stay for the good vibes</span><span class="dot">★</span><span>Huge portions</span><span class="dot">★</span><span>Open till late</span><span class="dot">★</span>
+  <span>Come for the food</span><span class="dot">★</span><span>Stay for the good vibes</span><span class="dot">★</span><span>Huge portions</span><span class="dot">★</span><span>Open till late</span><span class="dot">★</span>
+</div></div>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2 class="display">What we're<br>known for</h2>
+      <p>Big plates, bold flavor, no shortcuts. Here are the favorites. The full menu with prices is on our order page.</p>
+    </div>
+    <div class="menu">
+      <article class="dish wide reveal"><span class="tag">House favorite</span><img src="img/picana.jpg" alt="Picana with fries and grilled corn"><div class="cap"><h3>Picana Heaven</h3><p>Juicy sliced picana over fries with grilled corn and fresh pico.</p></div></article>
+      <article class="dish reveal"><img src="img/burger.jpg" alt="Stacked burger"><div class="cap"><h3>The Stack</h3><p>Layer on layer of beef and cheese. Bring your appetite.</p></div></article>
+      <article class="dish reveal"><img src="img/pizza.jpg" alt="Pizza"><div class="cap"><h3>Pizza</h3><p>Loaded edge to edge, fresh out of the oven.</p></div></article>
+      <article class="dish reveal"><img src="img/steakplate.jpg" alt="Steak with pasta salad"><div class="cap"><h3>Steak Plates</h3><p>Flavored steak with your choice of sides.</p></div></article>
+      <article class="dish reveal"><img src="img/nachos.jpg" alt="Loaded nachos"><div class="cap"><h3>Loaded Nachos</h3><p>Seasoned meat, guac, sour cream, the works.</p></div></article>
+      <article class="dish reveal"><img src="img/hotdog.jpg" alt="Hotdog"><div class="cap"><h3>Hotdogs</h3><p>Street style, the way it should be.</p></div></article>
+      <article class="dish reveal"><img src="img/fries.jpg" alt="Loaded fries cone"><div class="cap"><h3>Loaded Fries</h3><p>Crispy fries in a cone, topped and ready to walk.</p></div></article>
+      <article class="dish reveal"><img src="img/sausage.jpg" alt="Grilled sausage with fries"><div class="cap"><h3>Grilled Sausage</h3><p>Glazed, charred and stacked over fries.</p></div></article>
+      <article class="dish reveal"><img src="img/burger2.jpg" alt="Burger and fries"><div class="cap"><h3>Classic Burger</h3><p>With fries and our house sauces.</p></div></article>
+      <article class="dish reveal"><img src="img/cheesecake.jpg" alt="Cheesecake"><div class="cap"><h3>Something Sweet</h3><p>Save room for dessert.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="order reveal">
+      <div>
+        <div class="kicker" style="color:var(--red)">Pickup &amp; delivery</div>
+        <h2 class="display">Hungry? <em>We deliver.</em></h2>
+        <p>Order from your phone and pick it up with easy parking, or have The Don brought straight to you.</p>
+        <a class="btn" href="order.html">Start your order →</a>
+      </div>
+      <div class="slots">
+        <div class="slot"><b>Lunch delivery</b><span>11:30 AM · 2:00 PM</span></div>
+        <div class="slot"><b>Dinner delivery</b><span>4:30 PM · 9:00 PM</span></div>
+        <div class="slot"><b>Pickup</b><span>All opening hours</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="vibe" style="padding-top:0">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2 class="display">The spot</h2>
+      <p>Plenty of seating outside, a palapa terrace, string lights and a bar on the side. Bring the whole crew.</p>
+    </div>
+    <div class="vibe reveal">
+      <figure><img src="img/palapa.jpg" alt="Palapa terrace at night"></figure>
+      <figure><img src="img/terrace_day.jpg" alt="Terrace during the day"></figure>
+      <figure><img src="img/terrace_night.jpg" alt="Seating under the palapa"></figure>
+      <figure><img src="img/sign.jpg" alt="The Don sign"></figure>
+      <div class="note"><h3>The Don<br>+ Night Shop</h3><p>Drinks and snacks from The Night Shop right next door, open as late as we are.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:20px">
+  <div class="wrap review reveal">
+    <div class="stars">★★★★★</div>
+    <blockquote>"Great food, huge portions, reasonable prices and fun atmosphere."</blockquote>
+    <cite>Kel · Google review</cite>
+  </div>
+</section>
+
+<section id="visit">
+  <div class="wrap">
+    <div class="head reveal"><h2 class="display">Hours &amp;<br>locations</h2><p>Open every day from noon until late.</p></div>
+    <div class="visit">
+      <div class="card reveal">
+        <h3>Opening hours</h3>
+        <div class="sub">The Don &amp; Night Shop</div>
+        <ul class="hours" id="hours">
+          <li data-d="1"><span>Monday</span><span>12:00 PM · 2:00 AM</span></li>
+          <li data-d="2"><span>Tuesday</span><span>12:00 PM · 2:00 AM</span></li>
+          <li data-d="3"><span>Wednesday</span><span>12:00 PM · 3:00 AM</span></li>
+          <li data-d="4"><span>Thursday</span><span>12:00 PM · 2:00 AM</span></li>
+          <li data-d="5"><span>Friday</span><span>12:00 PM · 4:00 AM</span></li>
+          <li data-d="6"><span>Saturday</span><span>12:00 PM · 4:00 AM</span></li>
+          <li data-d="0"><span>Sunday</span><span>12:00 PM · 2:00 AM</span></li>
+        </ul>
+      </div>
+      <div class="card reveal">
+        <h3>Find us</h3>
+        <div class="sub">Two islands, one Don.</div>
+        <div class="locs">
+          <div class="loc"><div class="pin">📍</div><div><b>Willemstad</b><small>Architectenweg z/n, Salinja, Willemstad · <a href="https://wa.me/59995652810">+599 9 565 2810</a></small></div></div>
+          <div class="loc"><div class="pin">🌴</div><div><b>Sta. Maria <span class="soon">Coming soon</span></b><small>Our second Curaçao location. Opening date to be announced.</small></div></div>
+          <div class="loc"><div class="pin">🇳🇱</div><div><b>The Netherlands</b><small>Beijerlandselaan, Rotterdam</small></div></div>
+        </div>
+        <div class="map"><iframe loading="lazy" title="Map" src="https://www.google.com/maps?q=Architektenweg,+Willemstad,+Cura%C3%A7ao&output=embed"></iframe></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="row">
+      <div class="f-brand"><img src="img/logo.png" alt=""><div><div class="display" style="font-size:30px">The Don Street Restaurant</div><small style="color:var(--muted)">Come for the food, stay for the good vibes.</small></div></div>
+      <div class="socials">
+        <a href="https://www.instagram.com/thedon.curacao/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+        <a href="https://wa.me/59995652810" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a><a href="order.html" aria-label="Order">🛒</a>
+      </div>
+    </div>
+    <div class="fine">© <span id="yr"></span> The Don Street Restaurant · Willemstad, Curaçao</div>
+  </div>
+</footer>
+
+<a class="btn fab" href="order.html">Order now →</a>
+
+<script>
+document.getElementById('yr').textContent=new Date().getFullYear();
+var d=new Date().getDay();var li=document.querySelector('#hours li[data-d="'+d+'"]');if(li)li.classList.add('today');
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+</script>
+</body>
+</html>
