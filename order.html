@@ -38,8 +38,9 @@ header.top{position:sticky;top:0;z-index:40;background:rgba(11,11,11,.92);backdr
 .intro h1{font-size:clamp(44px,9vw,72px)}
 .intro h1 em{font-style:normal;color:var(--red2)}
 .intro p{color:var(--muted);font-size:14.5px;margin-top:6px}
-.feature{position:relative;border-radius:20px;overflow:hidden;margin:18px 0 6px;height:190px;background:url(img/burger.jpg) center/cover}
-.feature::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.85),rgba(0,0,0,.1))}
+.feature{position:relative;border-radius:20px;overflow:hidden;margin:18px 0 6px;height:200px;background:#141414;isolation:isolate}
+.feature::before{content:"";position:absolute;inset:0;background:url(img/burger.jpg) center 70%/cover no-repeat;animation:zoom 12s ease-in-out infinite alternate;z-index:0}
+.feature::after{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(90deg,rgba(0,0,0,.85),rgba(0,0,0,.1))}
 .feature div{position:relative;z-index:1;padding:24px;height:100%;display:flex;flex-direction:column;justify-content:center;max-width:65%}
 .feature h2{font-size:42px}
 .feature p{font-size:14px;color:#ddd;margin:4px 0 12px}
@@ -132,11 +133,8 @@ section.cat{padding-top:30px;scroll-margin-top:120px}
 @keyframes slide{to{transform:translateX(-50%)}}
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s}
 .reveal.in{opacity:1;transform:none}
-.feature{animation:zoom 14s ease-in-out infinite alternate}
-@keyframes zoom{from{background-size:110%}to{background-size:125%}}
-@media(max-width:680px){@keyframes zoom{from{background-size:auto 110%}to{background-size:auto 130%}}}
-@media(min-width:681px){.feature{animation:zoomd 10s ease-in-out infinite alternate;height:240px;background:#141414 url(img/burger.jpg) right 72%/55% auto no-repeat}}
-@keyframes zoomd{from{background-size:55% auto}to{background-size:62% auto}}
+@keyframes zoom{from{transform:scale(1)}to{transform:scale(1.12)}}
+@media(min-width:681px){.feature{height:240px}.feature::before{left:35%;background-position:center 70%;-webkit-mask-image:linear-gradient(90deg,transparent,#000 35%);mask-image:linear-gradient(90deg,transparent,#000 35%)}}
 .cartbar.bump button{animation:bump .35s}
 @keyframes bump{50%{transform:scale(1.04)}}
 footer{color:#6d6862;font-size:12.5px;text-align:center;padding:40px 0 10px}
