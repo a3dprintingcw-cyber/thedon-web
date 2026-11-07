@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kitchen board · The Don</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0b0b0b">
+<style>
+@font-face{font-family:"Bebas Neue";font-weight:400;font-display:swap;src:url(../fonts/bebas-neue-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:Inter;font-weight:400;font-display:swap;src:url(../fonts/inter-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:Inter;font-weight:500;font-display:swap;src:url(../fonts/inter-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:Inter;font-weight:700;font-display:swap;src:url(../fonts/inter-latin-700-normal.woff2) format("woff2")}
+:root{--red:#c8102e;--red2:#e0233f;--ink:#0b0b0b;--coal:#151515;--line:#262626;--paper:#f6f1ea;--muted:#9e988f;--lime:#d7f24a;--green:#2f7a3a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:var(--ink);color:var(--paper);-webkit-font-smoothing:antialiased;padding-bottom:40px}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit}
+.display{font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-weight:400;letter-spacing:.03em}
+
+.bar{position:sticky;top:0;z-index:5;background:#111;border-bottom:3px solid var(--red);display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;padding:10px 16px}
+.bar .brand{display:flex;align-items:center;gap:10px;margin-right:auto}
+.bar .brand img{width:40px;height:40px}
+.bar h1{font-family:"Bebas Neue";font-weight:400;font-size:28px;letter-spacing:.04em}
+.bar .clock{font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+.pill{border:2px solid #3a3a3a;border-radius:999px;padding:8px 14px;font-weight:700;font-size:14px;min-height:42px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.pill:hover{border-color:#666}
+.pill.on{background:var(--paper);color:#111;border-color:var(--paper)}
+.pill.warn{background:var(--red);border-color:var(--red);color:#fff}
+.pill:disabled{opacity:.4}
+.wait{display:inline-flex;align-items:center;gap:6px}
+.wait .pill{min-width:42px;justify-content:center;font-size:18px;padding:6px 10px}
+.wait b{min-width:96px;text-align:center}
+.demo{background:var(--lime);color:#111;font-weight:700;font-size:13.5px;text-align:center;padding:8px 14px}
+.demo a{font-weight:700}
+.alert{background:var(--red);color:#fff;font-weight:700;text-align:center;padding:8px 14px}
+
+.board{display:grid;gap:16px;padding:16px;align-items:start}
+@media(min-width:960px){.board{grid-template-columns:repeat(3,1fr)}}
+.col h2{font-family:"Bebas Neue";font-weight:400;font-size:30px;letter-spacing:.04em;display:flex;justify-content:space-between;align-items:center;padding:4px 10px 10px;border-radius:10px}
+.col h2 span{font-family:Inter;font-weight:700;font-size:15px;background:#222;border-radius:999px;padding:3px 11px}
+.board.has-new .col:first-child h2{animation:pulse 1s ease-in-out infinite}
+@keyframes pulse{50%{background:var(--red);color:#fff}}
+.empty{color:var(--muted);border:2px dashed #2c2c2c;border-radius:16px;padding:26px 14px;text-align:center}
+.cards{display:grid;gap:12px}
+
+.card{background:var(--paper);color:#111;border-radius:16px;overflow:hidden;box-shadow:0 8px 24px #0006}
+.card.fresh{animation:fresh 1s ease 3}
+@keyframes fresh{50%{box-shadow:0 0 0 5px var(--lime)}}
+.head{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--red);color:#fff}
+.card.late .head{background:#111}
+.num{font-family:"Bebas Neue";font-size:38px;line-height:1}
+.who{font-weight:700;line-height:1.25;min-width:0;overflow-wrap:anywhere;font-size:15px}
+.who a{font-weight:500;color:inherit}
+.time{margin-left:auto;text-align:right;font-weight:700;line-height:1.2;white-space:nowrap}
+.time small{display:block;font-weight:600;opacity:.85}
+.mode{display:flex;gap:8px;align-items:flex-start;padding:9px 14px;background:#efe7dc;font-weight:700;font-size:14px;border-bottom:1px solid #e2d8ca}
+.mode small{display:block;font-weight:500;color:#5a5249}
+.lines{list-style:none;padding:8px 14px}
+.lines li{padding:7px 0;border-bottom:1px solid #e6ddd0;font-size:17px;font-weight:700}
+.lines li:last-child{border:0}
+.lines small{display:block;font-weight:500;font-size:14.5px;color:#5a5249}
+.lines .note{color:var(--red);font-weight:700}
+.cnote{margin:0 14px 10px;padding:8px 11px;background:#ffe9a8;border-radius:10px;font-weight:600;font-size:14.5px}
+.foot{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 14px 14px}
+.total{font-weight:800;margin-right:auto;font-size:16px}
+.tag{border:2px solid #111;border-radius:999px;padding:5px 12px;font-weight:700;font-size:13.5px;min-height:38px}
+.tag.paid{background:var(--green);border-color:var(--green);color:#fff}
+.tag.method{background:#ffe9a8;border-color:#c99a1c}
+.go{background:var(--red);color:#fff;border-radius:12px;padding:10px 16px;font-weight:700;min-height:44px;box-shadow:0 3px 0 #7d0a1c}
+.go:active{transform:translateY(2px);box-shadow:0 1px 0 #7d0a1c}
+.links{display:flex;flex-wrap:wrap;gap:4px 16px;padding:0 14px 12px;font-size:14px}
+.links button{color:#7d0a1c;text-decoration:underline;font-weight:600}
+.links .end{margin-left:auto}
+
+.done{padding:0 16px}
+.done summary{cursor:pointer;font-weight:700;color:var(--muted);padding:10px 2px}
+.done table{width:100%;border-collapse:collapse;font-size:14.5px}
+.done th,.done td{text-align:left;padding:9px 8px;border-bottom:1px solid #222;vertical-align:top}
+.done th{color:var(--muted);font-weight:600}
+.done td button{color:var(--red2);text-decoration:underline;font-weight:600}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--lime);color:#111;font-weight:700;padding:10px 18px;border-radius:999px;z-index:20;opacity:0;transition:opacity .25s;pointer-events:none}
+.toast.on{opacity:1}
+@media(prefers-reduced-motion:reduce){.card.fresh,.board.has-new .col:first-child h2{animation:none}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="toast" id="toast"></div>
+<script src="../store.js"></script>
+<script>
+var app=document.getElementById('app');
+var COLS=[
+ {s:'new',t:'New',empty:'No new orders.',next:'cooking',act:'Start cooking'},
+ {s:'cooking',t:'Cooking',empty:'Nothing on the grill.',next:'ready',act:'Mark ready',back:'new'},
+ {s:'ready',t:'Ready',empty:'Nothing waiting.',next:'done',back:'cooking'}
+];
+var ui={sound:true,blocked:false,confirm:null,doneOpen:false,seen:null,fresh:{}};
+try{ui.sound=localStorage.getItem('thedon_sound')!=='0'}catch(e){}
+var audio=null;
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function hm(t){var d=new Date(t);return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}
+function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('on')},1800)}
+
+function beep(){if(!ui.sound)return;try{audio=audio||new (window.AudioContext||window.webkitAudioContext)();ui.blocked=audio.state==='suspended';if(ui.blocked)return;
+ [0,.22,.44,.9,1.12,1.34].forEach(function(d,i){var o=audio.createOscillator(),g=audio.createGain();o.type='square';o.frequency.value=i%3===2?1320:990;g.gain.setValueAtTime(.5,audio.currentTime+d);g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+d+.2);o.connect(g).connect(audio.destination);o.start(audio.currentTime+d);o.stop(audio.currentTime+d+.22)})}catch(e){}}
+document.addEventListener('pointerdown',function(){if(!ui.sound)return;try{audio=audio||new (window.AudioContext||window.webkitAudioContext)();audio.resume().then(function(){if(ui.blocked){ui.blocked=false;render()}})}catch(e){}},true);
+setInterval(function(){if(DonStore.orders().some(function(o){return o.status==='new'}))beep()},4000);
+
+function timeCell(o){
+  var mins=Math.round((o.due-Date.now())/60000);
+  var rel=o.status==='ready'?(o.mode==='delivery'?'out to deliver':'for pickup'):(mins>=0?'in '+mins+' min':(-mins)+' min late');
+  return hm(o.due)+'<small>'+rel+'</small>';
+}
+function card(o,c){
+  var late=o.status!=='ready'&&o.due<Date.now();
+  var act=c.s==='ready'?(o.mode==='delivery'?'Delivered':'Picked up'):c.act;
+  var paid=o.paid;
+  return '<article class="card'+(late?' late':'')+(ui.fresh[o.id]?' fresh':'')+'" data-id="'+o.id+'">'+
+   '<div class="head"><span class="num">#'+o.number+'</span><span class="who">'+esc(o.name)+'<br><a href="tel:'+esc(o.phone)+'">'+esc(o.phone)+'</a></span><span class="time">'+timeCell(o)+'</span></div>'+
+   '<div class="mode">'+(o.mode==='delivery'?'🛵 <span>DELIVERY<small>'+esc(o.address)+'</small></span>':'🚗 <span>PICKUP</span>')+'</div>'+
+   '<ul class="lines">'+o.items.map(function(l){return '<li>'+l.qty+' × '+esc(l.name)+(l.opts&&l.opts.length?'<small>'+esc(l.opts.join(', '))+'</small>':'')+(l.note?'<small class="note">Note: '+esc(l.note)+'</small>':'')+'</li>'}).join('')+'</ul>'+
+   (o.notes?'<p class="cnote">'+esc(o.notes)+'</p>':'')+
+   '<div class="foot"><span class="total">'+DonStore.money(o.total)+'</span>'+
+     (o.pay==='Online'&&paid?'<span class="tag paid">Paid online (demo)</span>':'<button class="tag'+(paid?' paid':'')+'" data-paid>'+(paid?'Paid':'Not paid')+'</button>')+
+     (o.pay!=='Online'?'<button class="tag method" data-method title="Tap to switch cash or card">'+(o.pay==='Card'?'Card':'Cash')+'</button>':'')+
+     '<button class="go" data-status="'+c.next+'">'+act+'</button></div>'+
+   '<div class="links">'+(c.back?'<button data-status="'+c.back+'">Move back</button>':'')+'<button class="end" data-cancel>'+(ui.confirm===o.id?'Tap again to cancel':'Cancel order')+'</button></div>'+
+  '</article>';
+}
+function render(){
+  var s=DonStore.settings(),all=DonStore.orders();
+  var nNew=all.filter(function(o){return o.status==='new'}).length;
+  document.title=(nNew?'('+nNew+') ':'')+'Kitchen board · The Don';
+  var fin=all.filter(function(o){return o.status==='done'||o.status==='cancelled'}).slice().reverse();
+  var taken=fin.filter(function(o){return o.status==='done'}).length;
+  var now=new Date();
+  var h='<header class="bar"><div class="brand"><img src="../img/logo.png" alt=""><h1>Kitchen board</h1><span class="clock">'+hm(now)+'</span></div>'+
+   '<button class="pill'+(s.paused?' warn':'')+'" data-pause>'+(s.paused?'Online orders paused · tap to resume':'Pause online orders')+'</button>'+
+   '<span class="wait"><button class="pill" data-prep="-5"'+(s.prep<=5?' disabled':'')+'>−</button><b>Wait '+s.prep+' min</b><button class="pill" data-prep="5"'+(s.prep>=120?' disabled':'')+'>+</button></span>'+
+   '<button class="pill'+(ui.sound?' on':'')+'" data-sound>Sound '+(ui.sound?'on':'off')+'</button>'+
+   '<a class="pill" href="../order.html" target="_blank">Order page ↗</a>'+
+   '</header>'+
+   '<div class="demo">DEMO · Orders placed on <a href="../order.html" target="_blank">the order page</a> on this device appear here live. Nothing is sent anywhere. <button data-reset style="text-decoration:underline;font-weight:700">Reset demo</button></div>'+
+   (!ui.sound?'<p class="alert">The alarm is off. New orders will not make a sound.</p>':ui.blocked?'<p class="alert">Tap anywhere once to switch the alarm on.</p>':'')+
+   '<div class="board'+(nNew?' has-new':'')+'">'+COLS.map(function(c){var os=all.filter(function(o){return o.status===c.s});
+     return '<section class="col"><h2>'+(c.s==='ready'?'Ready · pickup &amp; delivery':c.t)+' <span>'+os.length+'</span></h2><div class="cards">'+(os.length?os.map(function(o){return card(o,c)}).join(''):'<p class="empty">'+c.empty+'</p>')+'</div></section>'}).join('')+'</div>'+
+   '<details class="done"'+(ui.doneOpen?' open':'')+'><summary>Finished today: '+taken+' completed'+(fin.length-taken?', '+(fin.length-taken)+' cancelled':'')+'</summary>'+
+   (fin.length?'<table><thead><tr><th>Order</th><th>Name</th><th>Status</th><th></th></tr></thead><tbody>'+fin.map(function(o){return '<tr data-id="'+o.id+'"><td>#'+o.number+'</td><td>'+esc(o.name)+'</td><td>'+(o.status==='done'?(o.mode==='delivery'?'Delivered':'Picked up')+(o.paid?', paid':', not marked paid'):'Cancelled')+'</td><td><button data-status="ready">Put back on the board</button></td></tr>'}).join('')+'</tbody></table>':'<p style="color:var(--muted);padding:6px 2px">Nothing finished yet.</p>')+'</details>';
+  app.innerHTML=h;
+  app.querySelector('.done').addEventListener('toggle',function(e){ui.doneOpen=e.target.open});
+}
+app.addEventListener('click',function(e){
+  var b=e.target.closest('button');if(!b)return;
+  var el=b.closest('[data-id]'),id=el&&el.dataset.id;
+  if(b.hasAttribute('data-sound')){ui.sound=!ui.sound;try{localStorage.setItem('thedon_sound',ui.sound?'1':'0')}catch(x){}render();return}
+  if(b.hasAttribute('data-pause')){var s=DonStore.settings();DonStore.setSettings({paused:!s.paused});render();return}
+  if(b.dataset.prep){var s2=DonStore.settings();DonStore.setSettings({prep:Math.max(5,Math.min(120,s2.prep+Number(b.dataset.prep)))});render();return}
+  if(b.hasAttribute('data-reset')){DonStore.reset();ui.seen=null;render();toast('Demo reset');return}
+  if(!id)return;
+  if(b.dataset.status){DonStore.update(id,{status:b.dataset.status});ui.confirm=null;render();var map={cooking:'Cooking',ready:'Marked ready',done:'Completed',new:'Moved back'};toast(map[b.dataset.status]||'Updated');return}
+  if(b.hasAttribute('data-paid')){var o=DonStore.get(id);DonStore.update(id,{paid:!o.paid});render();return}
+  if(b.hasAttribute('data-method')){var o2=DonStore.get(id);DonStore.update(id,{pay:o2.pay==='Card'?'Cash':'Card'});render();return}
+  if(b.hasAttribute('data-cancel')){if(ui.confirm===id){DonStore.update(id,{status:'cancelled'});ui.confirm=null;toast('Order cancelled')}else{ui.confirm=id;setTimeout(function(){if(ui.confirm===id){ui.confirm=null;render()}},4000)}render();return}
+});
+function sync(){
+  var ids=DonStore.orders().map(function(o){return o.id});
+  if(ui.seen){ids.forEach(function(i){if(ui.seen.indexOf(i)<0){ui.fresh[i]=1;setTimeout(function(){delete ui.fresh[i]},3500);beep();toast('New order!')}})}
+  ui.seen=ids;render();
+}
+window.addEventListener('storage',function(e){if(!e.key||e.key.indexOf('thedon_')===0)sync()});
+setInterval(sync,3000);
+DonStore.seed();
+sync();
+</script>
+</body>
+</html>
